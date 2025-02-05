@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đánh Giá Hiệu Suất Nhân Viên</title>
+    <style>
+        /* Giao diện */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        .container {
+            width: 80%;
+            margin: 30px auto;
+        }
+        .section {
+            background-color: #fff;
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .section h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        textarea {
+            height: 120px;
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 5px;
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            background-color: #e0f7e0;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #d0f0d0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Đánh Giá Hiệu Suất Nhân Viên</h1>
+</header>
+
+<div class="container">
+    <div class="section">
+        <h2>Chọn Nhân Viên Để Đánh Giá</h2>
+        <div class="form-group">
+            <label for="employee-select">Chọn Nhân Viên</label>
+            <select id="employee-select">
+                <option value="">Chọn nhân viên...</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="section" id="employee-details" style="display:none;">
+        <h2>Thông Tin Nhân Viên</h2>
+        <p id="employee-name"></p>
+        <p id="employee-position"></p>
+
+        <h2>Đánh Giá Hiệu Suất</h2>
+
+        <div class="form-group">
+            <label for="kpi-rating">Điểm KPI (1 - 10)</label>
+            <input type="number" id="kpi-rating" min="1" max="10" placeholder="Nhập điểm KPI">
+        </div>
+
+        <div class="form-group">
+            <label for="quality-rating">Điểm Chất Lượng Công Việc (1 - 10)</label>
+            <input type="number" id="quality-rating" min="1" max="10" placeholder="Nhập điểm chất lượng công việc">
+        </div>
+
+        <div class="form-group">
+            <label for="timeliness-rating">Điểm Tiến Độ Công Việc (1 - 10)</label>
+            <input type="number" id="timeliness-rating" min="1" max="10" placeholder="Nhập điểm tiến độ công việc">
+        </div>
+
+        <div class="form-group">
+            <label for="feedback-rating">Điểm Phản Hồi Từ Đồng Nghiệp (1 - 10)</label>
+            <input type="number" id="feedback-rating" min="1" max="10" placeholder="Nhập điểm phản hồi từ đồng nghiệp">
+        </div>
+
+        <div class="form-group">
+            <label for="overall-feedback">Nhận Xét Tổng Quan</label>
+            <textarea id="overall-feedback" placeholder="Nhận xét về hiệu suất của nhân viên"></textarea>
+        </div>
+
+        <a href="#" class="button" id="submit-rating">Lưu Đánh Giá</a>
+    </div>
+
+    <div class="section">
+        <h2>Lịch Sử Đánh Giá</h2>
+        <div id="evaluation-history">
+            <p>Chưa có đánh giá nào.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Dữ liệu nhân viên từ hệ thống quản lý
+    const employees = [
+        { id: 1, name: 'Nguyễn Văn A', position: 'Giám Đốc' },
+        { id: 2, name: 'Trần Thị B', position: 'Trưởng Phòng' },
+        { id: 3, name: 'Lê Minh C', position: 'Nhân Viên' }
+    ];
+
+    // Hàm tải danh sách nhân viên
+    const loadEmployees = () => {
+        const select = document.getElementById('employee-select');
+        employees.forEach(employee => {
+            const option = document.createElement('option');
+            option.value = employee.id;
+            option.textContent = `${employee.name} - ${employee.position}`;
+            select.appendChild(option);
+        });
+    };
+
+    // Lịch sử đánh giá
+    const evaluationHistory = JSON.parse(localStorage.getItem('evaluationHistory')) || [];
+
+    // Hiển thị lịch sử đánh giá
+    const renderHistory = () => {
+        const historyDiv = document.getElementById('evaluation-history');
+        if (evaluationHistory.length === 0) {
+            historyDiv.innerHTML = '<p>Chưa có đánh giá nào.</p>';
+            return;
+        }
+        historyDiv.innerHTML = evaluationHistory
+            .map(evaluation => `
+                <p><strong>${evaluation.name}:</strong> Điểm trung bình: ${evaluation.averageScore.toFixed(2)} / 10.</p>
+            `)
+            .join('');
+    };
+
+    // Hiển thị thông tin nhân viên
+    document.getElementById('employee-select').addEventListener('change', function() {
+        const selectedId = parseInt(this.value);
+        if (!selectedId) {
+            document.getElementById('employee-details').style.display = 'none';
+            return;
+        }
+        const employee = employees.find(emp => emp.id === selectedId);
+        document.getElementById('employee-name').textContent = `Tên: ${employee.name}`;
+        document.getElementById('employee-position').textContent = `Chức Vụ: ${employee.position}`;
+        document.getElementById('employee-details').style.display = 'block';
+    });
+
+    // Lưu đánh giá
+    document.getElementById('submit-rating').addEventListener('click', function(event) {
+        event.preventDefault();
+
+        const selectedId = parseInt(document.getElementById('employee-select').value);
+        const kpiRating = parseInt(document.getElementById('kpi-rating').value);
+        const qualityRating = parseInt(document.getElementById('quality-rating').value);
+        const timelinessRating = parseInt(document.getElementById('timeliness-rating').value);
+        const feedbackRating = parseInt(document.getElementById('feedback-rating').value);
+        const overallFeedback = document.getElementById('overall-feedback').value;
+
+        if (!selectedId || !kpiRating || !qualityRating || !timelinessRating || !feedbackRating) {
+            alert('Vui lòng nhập đầy đủ thông tin!');
+            return;
+        }
+
+        const employee = employees.find(emp => emp.id === selectedId);
+        const averageScore = (kpiRating + qualityRating + timelinessRating + feedbackRating) / 4;
+
+        evaluationHistory.push({
+            id: employee.id,
+            name: employee.name,
+            position: employee.position,
+            averageScore,
+            feedback: overallFeedback
+        });
+
+        localStorage.setItem('evaluationHistory', JSON.stringify(evaluationHistory));
+        renderHistory();
+        alert('Đánh giá đã được lưu!');
+    });
+
+    // Khởi tạo
+    loadEmployees();
+    renderHistory();
+</script>
+
+</body>
+</html>

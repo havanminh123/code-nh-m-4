@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Nhân Viên - Unilever Việt Nam</title>
+    <style>
+        /* Toàn bộ trang */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+            color: #333;
+        }
+        header {
+            background-color: #ff8c00;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        /* Container chính */
+        .container {
+            width: 70%;
+            margin: auto;
+            padding: 30px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Thông tin nhân viên */
+        .employee-detail {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 900px;
+            text-align: left;
+        }
+
+        .employee-detail img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid #ff8c00;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .employee-detail h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .employee-detail p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin: 10px 0;
+            color: #555;
+        }
+
+        .employee-detail p strong {
+            color: #ff8c00;
+        }
+
+        /* Nút quay lại */
+        .back-button {
+            display: inline-block;
+            background-color: #ff8c00;
+            color: white;
+            padding: 12px 24px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 30px;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #e07b00;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+
+            .employee-detail {
+                padding: 20px;
+            }
+
+            .employee-detail img {
+                width: 150px;
+                height: 150px;
+            }
+
+            .employee-detail h2 {
+                font-size: 1.8rem;
+            }
+
+            .employee-detail p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Chi Tiết Nhân Viên - Unilever Việt Nam</h1>
+    </header>
+    <div class="container">
+        <div id="employee-detail" class="employee-detail">
+            <!-- Thông tin nhân viên sẽ được thêm vào đây -->
+        </div>
+        <a href="employees.html" class="back-button">Trở về danh sách</a>
+    </div>
+
+    <script>
+        // Lấy id từ URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const employeeId = urlParams.get('id');
+
+        let employees = JSON.parse(localStorage.getItem('employees')) || [];
+
+        // Tìm nhân viên theo id
+        const employee = employees.find(emp => emp.id === employeeId);
+
+        if (employee) {
+            // Hiển thị thông tin nhân viên
+            const employeeDetail = document.getElementById('employee-detail');
+            employeeDetail.innerHTML = `
+                <div class="employee-detail">
+                    <img src="${employee.image}" alt="Ảnh Nhân Viên">
+                    <h2>${employee.name}</h2>
+                    <p><strong>Mã Nhân Viên:</strong> ${employee.id}</p>
+                    <p><strong>Ngày Sinh:</strong> ${employee.dob}</p>
+                    <p><strong>Ngày Vào Làm:</strong> ${employee.joinDate}</p>
+                    <p><strong>Lương:</strong> ${employee.salary.toLocaleString()} VNĐ</p>
+                    <p><strong>Chức Vụ:</strong> ${employee.position}</p>
+                    <p><strong>Ghi Chú:</strong> ${employee.note}</p>
+                </div>
+            `;
+        } else {
+            // Nếu không tìm thấy nhân viên, hiển thị thông báo
+            document.getElementById('employee-detail').innerHTML = '<p>Không tìm thấy nhân viên này.</p>';
+        }
+    </script>
+</body>
+</html>

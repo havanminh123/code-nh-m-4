@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unilever Vietnam Employee Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('https://khoinguonsangtao.vn/wp-content/uploads/2022/08/hinh-nen-cong-nghe-full-hd.jpg'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+        }
+        
+        header {
+            margin-bottom: 30px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .admin {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            align-items: stretch; /* Ensures equal height for cards */
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.9); /* White background for cards */
+            border-radius: 10px;
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.2s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .card:hover {
+            transform: scale(1.05); /* Hover effect */
+        }
+        img {
+            max-width: 100%;
+            border-radius: 8px;
+            height: auto; /* Ensures automatic height */
+        }
+        h2 {
+            margin: 15px 0;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Unilever Vietnam Employee Management System</h1>
+            <div class="admin">Admin</div>
+        </header>
+        <div class="grid">
+            <a href="employee-management.html" class="card">
+                <h2>Employee Management</h2>
+                <img src="https://vanphongxanh.vn/wp-content/uploads/2022/12/xu-huong-quan-tri-nguon-nhan-luc-hien-nay-10.png" alt="Employee Management">
+            </a>
+            <a href="/attendance-management" class="card">
+                <h2>Attendance Management</h2>
+                <img src="https://facepro.vn/wp-content/uploads/2024/01/CHAM-CONG-BANG-KHUON-MAT.jpg" alt="Attendance Management">
+            </a>
+            <a href="/salary-management" class="card">
+                <h2>Salary Management</h2>
+                <img src="https://tse1.mm.bing.net/th?id=OIP.mzmaaTt4kcEmf9S0UKkR-wHaDt&pid=Api&P=0&h=180" alt="Salary Management">
+            </a>
+            <a href="/benefits-management" class="card">
+                <h2>Benefits Management</h2>
+                <img src="https://tse2.mm.bing.net/th?id=OIP.lxqqFonkr1aHjgSiU10LggHaE8&pid=Api&P=0&h=180" alt="Benefits Management">
+            </a>
+            <a href="/performance-evaluation" class="card">
+                <h2>Performance Evaluation</h2>
+                <img src="https://tse1.mm.bing.net/th?id=OIP.NMCXqmU0W4cCO4szGTbFEwHaFD&pid=Api&P=0&h=180" alt="Performance Evaluation">
+            </a>
+            <a href="/training-development" class="card">
+                <h2>Training & Development</h2>
+                <img src="https://tse4.mm.bing.net/th?id=OIP.2fuKOJLANzhzfshFpmnxewHaE7&pid=Api&P=0&h=180" alt="Training & Development">
+            </a>
+            <a href="/reports" class="card">
+                <h2>Reports</h2>
+                <img src="https://tse1.mm.bing.net/th?id=OIP.6WE_rdPZ9eVOwTo7-Foy9wHaFC&pid=Api&P=0&h=180" alt="Reports">
+            </a>
+            <a href="/documents-management" class="card">
+                <h2>Document Management</h2>
+                <img src="https://tse3.mm.bing.net/th?id=OIP.R3VswtM8UJEsgn39vxP1BgHaF7&pid=Api&P=0&h=180" alt="Document Management">
+            </a>
+        </div>
+    </div>
+</body>
+</html>

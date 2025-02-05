@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Liên Hệ Hỗ Trợ</title>
+    <style>
+        /* Cấu hình chung cho body */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #6e7f97, #1f3c57);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 40px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Container chính */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        h2 {
+            color: #0056b3;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        /* Form liên hệ */
+        .contact-form {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form button {
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .contact-form button {
+            background: linear-gradient(90deg, #28a745, #218838);
+            color: white;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-form button:hover {
+            background: linear-gradient(90deg, #218838, #28a745);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Thông tin liên lạc */
+        .contact-info,
+        .emergency-info,
+        .chat-box {
+            margin-top: 30px;
+            padding: 25px;
+            background-color: #e6f7ff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-info h3,
+        .emergency-info h3 {
+            color: #007bff;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .info-item {
+            font-size: 18px;
+            color: #333;
+            margin: 8px 0;
+        }
+
+        .chat-box input {
+            width: 85%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            margin-right: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .chat-box input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .chat-box button {
+            width: 15%;
+            padding: 14px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chat-box button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Bản đồ */
+        .map-container {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f7f7f7;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 450px;
+            border-radius: 12px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 32px;
+            }
+
+            .container {
+                width: 95%;
+            }
+
+            .chat-box input {
+                width: 75%;
+            }
+
+            .chat-box button {
+                width: 20%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Hệ Thống Liên Hệ Hỗ Trợ</h1>
+</header>
+
+<div class="container">
+    <!-- Form Liên Hệ -->
+    <div class="contact-form">
+        <h2>Gửi Liên Hệ</h2>
+        <form id="contactForm">
+            <label for="name">Tên của bạn:</label>
+            <input type="text" id="name" name="name" placeholder="Nhập tên của bạn" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Nhập email của bạn" required>
+
+            <label for="subject">Chủ đề:</label>
+            <input type="text" id="subject" name="subject" placeholder="Chọn chủ đề" required>
+
+            <label for="message">Nội dung:</label>
+            <textarea id="message" name="message" placeholder="Nhập nội dung yêu cầu hoặc câu hỏi" rows="5" required></textarea>
+
+            <button type="submit">Gửi Liên Hệ</button>
+        </form>
+    </div>
+
+    <!-- Thông Tin Liên Lạc -->
+    <div class="contact-info">
+        <h3>Thông Tin Liên Lạc</h3>
+        <p class="info-item"><strong>Email Nhân Sự:</strong> hr@company.com</p>
+        <p class="info-item"><strong>Địa Chỉ Văn Phòng:</strong> 123 Đường ABC, Quận XYZ, TP.HCM</p>
+        <p class="info-item"><strong>Điện Thoại Phòng IT:</strong> +84 123 456 789</p>
+        <p class="info-item"><strong>Hỗ Trợ Khẩn Cấp:</strong> +84 987 654 321</p>
+    </div>
+
+
+    <!-- Chat Nội Bộ -->
+    <div class="chat-box">
+        <h3>Chat với Bộ Phận Hỗ Trợ</h3>
+        <input type="text" id="chatInput" placeholder="Nhập câu hỏi hoặc yêu cầu của bạn...">
+        <button id="chatButton">Gửi</button>
+    </div>
+
+    <!-- Bản Đồ -->
+    <div class="map-container">
+        <h3>Vị Trí Văn Phòng</h3>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.988438184779!2d106.632126815393!3d10.762622561709083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528f5e6091fbd%3A0x4d9ebbb01700b6b7!2s123%20%C4%90%C6%B0%E1%BB%9Dng%20ABC%2C%20Q.%20XYZ%2C%20TP.HCM!5e0!3m2!1svi!2s!4v1671006353088!5m2!1svi!2s" allowfullscreen=""></iframe>
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2025 Công ty XYZ - Tất cả các quyền được bảo vệ.</p>
+    <button onclick="window.location.href='quanly.html'">Quay lại trang chính</button>
+</div>
+
+<script>
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        alert("Cảm ơn bạn đã gửi yêu cầu. Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.");
+        document.getElementById("contactForm").reset();
+    });
+
+    document.getElementById("chatButton").addEventListener("click", function() {
+        const chatMessage = document.getElementById("chatInput").value;
+        if (chatMessage) {
+            alert("Bạn đã gửi: " + chatMessage);
+            document.getElementById("chatInput").value = ""; // Reset input field
+        } else {
+            alert("Vui lòng nhập yêu cầu trước khi gửi.");
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Hiệu Suất Nhân Viên</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 30px auto;
+        }
+
+        .section {
+            background-color: #fff;
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .section ul {
+            margin-top: 15px;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section ul li {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+            margin: 8px 0;
+        }
+
+        .button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 5px;
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .section-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .section-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Hệ Thống Quản Lý Hiệu Suất Nhân Viên</h1>
+</header>
+
+<div class="container">
+
+    <div class="section-container">
+        <div class="section" id="performance-evaluation">
+            <h2>1. Đánh Giá Hiệu Suất</h2>
+            <p>Đánh giá hiệu suất của nhân viên theo các tiêu chí rõ ràng như KPI, chất lượng công việc, tiến độ hoàn thành.</p>
+            <a href="#" class="button">Xem chi tiết</a>
+        </div>
+
+        <div class="section" id="goal-management">
+            <h2>2. Quản Lý Mục Tiêu</h2>
+            <p>Thiết lập và theo dõi mục tiêu cá nhân và tổ chức, đảm bảo chúng đáp ứng các tiêu chí SMART.</p>
+            <a href="#" class="button">Xem chi tiết</a>
+        </div>
+
+        <div class="section" id="performance-report">
+            <h2>3. Báo Cáo Hiệu Suất</h2>
+            <p>Cung cấp các báo cáo chi tiết về hiệu suất của nhân viên, giúp người quản lý đưa ra quyết định chính xác hơn.</p>
+            <a href="#" class="button">Xem chi tiết</a>
+        </div>
+
+        <div class="section" id="training-development">
+            <h2>4. Đào Tạo và Phát Triển</h2>
+            <p>Chương trình đào tạo và phát triển giúp nâng cao kỹ năng cho nhân viên, dựa trên kết quả đánh giá hiệu suất.</p>
+            <a href="#" class="button">Xem chi tiết</a>
+        </div>
+
+        <div class="section" id="feedback">
+            <h2>5. Phản Hồi và Động Lực</h2>
+            <p>Cung cấp phản hồi và các biện pháp động viên để nhân viên duy trì hoặc cải thiện hiệu suất.</p>
+            <a href="#" class="button">Xem chi tiết</a>
+        </div>
+
+        <div class="section" id="task-management">
+            <h2>6. Quản Lý Phân Công Công Việc</h2>
+            <p>Phân công và theo dõi tiến độ công việc của nhân viên, đảm bảo công việc được thực hiện đúng hạn và đạt chất lượng.</p>
+            <a href="#" class="button">Xem chi tiết</a>
+        </div>
+
+        <div class="section" id="employee-surveys">
+            <h2>7. Khảo Sát Nhân Viên</h2>
+            <p>Thực hiện khảo sát định kỳ để đo lường sự hài lòng và mức độ gắn kết của nhân viên trong tổ chức.</p>
+            <a href="#" class="button">Xem chi tiết</a>
+        </div>
+
+        <div class="section" id="leadership-development">
+            <h2>8. Phát Triển Lãnh Đạo</h2>
+            <p>Chương trình phát triển lãnh đạo giúp nhân viên tiềm năng phát triển kỹ năng lãnh đạo và khả năng quản lý.</p>
+            <a href="#" class="button">Xem chi tiết</a>
+        </div>
+
+        <div class="section" id="time-productivity">
+            <h2>9. Quản Lý Thời Gian và Năng Suất</h2>
+            <p>Quản lý thời gian làm việc của nhân viên, tối ưu hóa công việc và nâng cao năng suất.</p>
+            <a href="#" class="button">Xem chi tiết</a>
+        </div>
+
+        <div class="section" id="process-improvement">
+            <h2>10. Cải Tiến Quy Trình</h2>
+            <p>Phân tích và cải tiến quy trình làm việc để nâng cao hiệu suất và giảm thiểu lãng phí trong công việc.</p>
+            <a href="#" class="button">Xem chi tiết</a>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+</html>

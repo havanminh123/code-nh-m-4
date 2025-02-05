@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chấm Công Nhận Diện Khuôn Mặt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f4f4f4;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        video {
+            width: 100%;
+            border-radius: 10px;
+        }
+        input, button {
+            margin-top: 10px;
+            padding: 10px;
+            width: 90%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Chấm Công Bằng Nhận Diện Khuôn Mặt</h2>
+        <input type="text" id="employee_id" placeholder="Nhập mã nhân viên">
+        <video id="video" autoplay></video>
+        <button id="capture">Chấm Công</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        const video = document.getElementById("video");
+        const captureButton = document.getElementById("capture");
+        const result = document.getElementById("result");
+
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => video.srcObject = stream)
+            .catch(error => console.error("Lỗi camera:", error));
+
+        captureButton.addEventListener("click", async () => {
+            const canvas = document.createElement("canvas");
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const imageData = canvas.toDataURL("image/jpeg");
+
+            const employeeId = document.getElementById("employee_id").value;
+            if (!employeeId) {
+                alert("Vui lòng nhập mã nhân viên!");
+                return;
+            }
+
+            const response = await fetch("/attendance", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ employee_id: employeeId, image: imageData })
+            });
+
+            const data = await response.json();
+            result.innerText = data.message;
+        });
+    </script>
+</body>
+</html>
