@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Hợp Đồng</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: #004080;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        h2 {
+            margin: 0 0 20px 0;
+            color: #333;
+        }
+
+        .employee-select {
+            margin-bottom: 20px;
+        }
+
+        .employee-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .employee-info img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .contract-form {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .contract-form label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        .contract-form input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .actions {
+            margin-top: 20px;
+        }
+
+        .actions button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Quản Lý Hợp Đồng</h1>
+</div>
+
+<div class="container">
+    <div class="employee-select">
+        <label for="employee-select">Chọn Nhân Viên:</label>
+        <select id="employee-select" onchange="displayEmployeeInfo()"></select>
+    </div>
+
+    <div class="employee-info" id="employee-info" style="display: none;">
+        <img id="employee-image" src="" alt="Employee Image">
+        <div>
+            <strong>Tên:</strong> <span id="employee-name"></span><br>
+            <strong>Chức vụ:</strong> <span id="employee-position"></span>
+        </div>
+    </div>
+
+    <div class="contract-form" id="contract-form">
+        <h3>Thêm Hợp Đồng</h3>
+        <label for="contract-name">Tên Hợp Đồng:</label>
+        <input type="text" id="contract-name" placeholder="Nhập tên hợp đồng" required>
+        
+        <label for="contract-start-date">Ngày Bắt Đầu:</label>
+        <input type="date" id="contract-start-date" required>
+        
+        <label for="contract-end-date">Ngày Kết Thúc:</label>
+        <input type="date" id="contract-end-date" required>
+        
+        <label for="contract-value">Giá Trị Hợp Đồng:</label>
+        <input type="number" id="contract-value" placeholder="Nhập giá trị hợp đồng" required>
+        
+        <button onclick="submitContract()">Giao Hợp Đồng</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Tên Hợp Đồng</th>
+                <th>Giá Trị</th>
+                <th>Ngày Tạo</th>
+                <th>Hành Động</th>
+            </tr>
+        </thead>
+        <tbody id="contract-table-body">
+            <!-- Dữ liệu hợp đồng sẽ được thêm vào đây -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    const employees = JSON.parse(localStorage.getItem('employees')) || [];
+    const contracts = [];
+
+    function loadEmployees() {
+        const employeeSelect = document.getElementById('employee-select');
+        employees.forEach((employee, index) => {
+            const option = document.createElement('option');
+            option.value = index;
+            option.textContent = employee.name;
+            employeeSelect.appendChild(option);
+        });
+    }
+
+    function displayEmployeeInfo() {
+        const employeeIndex = document.getElementById('employee-select').value;
+        const employee = employees[employeeIndex];
+
+        if (employee) {
+            document.getElementById('employee-name').textContent = employee.name;
+            document.getElementById('employee-position').textContent = employee.position;
+            document.getElementById('employee-image').src = employee.image || 'default-avatar.png'; // Placeholder image
+            document.getElementById('employee-info').style.display = 'flex';
+            document.getElementById('contract-form').style.display = 'block'; // Hiển thị form thêm hợp đồng
+        } else {
+            document.getElementById('employee-info').style.display = 'none';
+            document.getElementById('contract-form').style.display = 'none';
+        }
+    }
+
+    function submitContract() {
+        const contractName = document.getElementById('contract-name').value;
+        const startDate = document.getElementById('contract-start-date').value;
+        const endDate = document.getElementById('contract-end-date').value;
+        const contractValue = document.getElementById('contract-value').value;
+        const employeeIndex = document.getElementById('employee-select').value;
+
+        if (employeeIndex) {
+            const newContract = {
+                name: contractName,
+                value: contractValue,
+                startDate: startDate,
+                endDate: endDate,
+                employee: employees[employeeIndex].name
+            };
+            contracts.push(newContract);
+            renderContracts();
+            alert(`Hợp đồng "${contractName}" đã được giao cho nhân viên ${employees[employeeIndex].name}!`);
+            document.getElementById('contract-form').reset(); // Reset form
+        } else {
+            alert("Vui lòng chọn nhân viên để giao hợp đồng!");
+        }
+    }
+
+    function renderContracts() {
+        const tableBody = document.getElementById('contract-table-body');
+        tableBody.innerHTML = '';
+        contracts.forEach((contract, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${contract.name}</td>
+                <td>${contract.value} đ</td>
+                <td>${contract.startDate} - ${contract.endDate}</td>
+                <td><button onclick="viewContract('${contract.name}')">Xem</button></td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+
+    function viewContract(contractName) {
+        alert(`Chi tiết hợp đồng: ${contractName}`);
+        // Có thể mở rộng để hiển thị chi tiết hơn nếu cần
+    }
+
+    window.onload = loadEmployees;
+</script>
+
+</body>
+</html>
